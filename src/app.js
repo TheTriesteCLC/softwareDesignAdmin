@@ -30,7 +30,6 @@ app.use(passport.session());
 
 //Settup miscellanous
 const morgan = require("morgan");
-const helmet = require("helmet");
 const compression = require("compression");
 
 //Init middlewares
@@ -70,7 +69,6 @@ app.set("views", path.join(__dirname, "resources", "views"));
 //set up when using
 //app.use('/static', express.static(`${__dirname}\\public`))
 //Setup CSS
-app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../publicAdmin')));
 
 //Set up JSON middleware for POST PUT

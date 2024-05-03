@@ -1,0 +1,228 @@
+<body class="">
+    <div class="container position-sticky z-index-sticky top-0">
+      <div class="row">
+        <div class="col-12">
+          <!-- Navbar -->
+          <nav
+            class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4"
+          >
+            <div class="container-fluid ps-2 pe-0">
+              <button
+                class="navbar-toggler shadow-none ms-2"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navigation"
+                aria-controls="navigation"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon mt-2">
+                  <span class="navbar-toggler-bar bar1"></span>
+                  <span class="navbar-toggler-bar bar2"></span>
+                  <span class="navbar-toggler-bar bar3"></span>
+                </span>
+              </button>
+              <div class="collapse navbar-collapse" id="navigation">
+                <ul class="navbar-nav mx-auto">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link d-flex align-items-center me-2 active"
+                      aria-current="page"
+                      href="/admin/dashboard"
+                    >
+                      <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
+                      Dashboard
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link me-2" href="/admin/profile">
+                      <i class="fa fa-user opacity-6 text-dark me-1"></i>
+                      Profile
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link me-2" href="/admin/signup">
+                      <i
+                        class="fas fa-user-circle opacity-6 text-dark me-1"
+                      ></i>
+                      Sign Up
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!-- End Navbar -->
+        </div>
+      </div>
+    </div>
+    <main class="main-content mt-0">
+      <section>
+        <div class="page-header min-vh-100">
+          <div class="container">
+            <div class="mt-5">
+    <div class="row justify-content-center align-items-center h-100 pt-5">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Sign-up</h3>
+            <form method="POST" action="/signup">
+              <div class="row">
+                <div class="col-md-12 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="fullname" class="form-control form-control-lg bg-light" name="fullname" required/>
+                    <label class="form-label" for="fullname">Full Name</label>
+                  </div>
+
+                </div>
+                {{!-- <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="email" class="form-control form-control-lg bg-light" name="email" required/>
+                    <label class="form-label" for="email">Email</label>
+                  </div>
+
+                </div> --}}
+              </div>
+
+              {{!-- <div class="row">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                  <div class="form-outline datepicker w-100">
+                    <input type="date" class="form-control form-control-lg bg-light" id="birthdayDate" name="dob" required/>
+                    <label for="birthdayDate" class="form-label">Birthday</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <h6 class="mb-2 pb-1">Gender: </h6>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sex" id="femaleGender"
+                      value="female" checked />
+                    <label class="form-check-label" for="femaleGender">Female</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sex" id="maleGender"
+                      value="male" />
+                    <label class="form-check-label" for="maleGender">Male</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sex" id="otherGender"
+                      value="other" />
+                    <label class="form-check-label" for="otherGender">Other</label>
+                  </div>
+
+                </div>
+              </div> --}}
+
+              <div class="row">
+                <div class="col-md-12 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="tel" id="phone" class="form-control form-control-lg bg-light" pattern="+[0-9]{11}" name="tel" required/>
+                    <label class="form-label" for="phone">Phone Number</label>
+                  </div>
+
+                </div>
+                {{!-- <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="street" id="address" class="form-control form-control-lg bg-light" name="address" required/>
+                    <label class="form-label" for="address">Address</label>
+                  </div>
+
+                </div> --}}
+              </div>
+
+              {{!-- <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="text" id="canban" class="form-control form-control-lg bg-light" placeholder="Enter 'banning' for providing priviledge" name="canBan" value=""/>
+                    <label class="form-label" for="canban">Banning account priviledge</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="text" id="canAdd" class="form-control form-control-lg bg-light" placeholder="Enter 'adding' for providing priviledge" name="canAdd" value=""/>
+                    <label class="form-label" for="canAdd">Adding products priviledge</label>
+                  </div>
+
+                </div>
+              </div> --}}
+
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="text" id="username" class="form-control form-control-lg bg-light" name="username" required/>
+                    <label class="form-label" for="username">Username</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="password" id="password" class="form-control form-control-lg bg-light" name="password" required/>
+                    <label class="form-label" for="password">Password</label>
+                    <div>
+                      <input type="checkbox" onclick="passwordToggle('password')">Show Password
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Create</button>
+              </div>
+
+              {{!-- <div class="text-center mt-4">
+                <p>Already have an account? <a href="/admin/login">Login</a></p>
+            </div> --}}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!--   Core JS Files   -->
+    <script src="/assets/js/core/popper.min.js"></script>
+    <script src="/assets/js/core/bootstrap.min.js"></script>
+    <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+      var win = navigator.platform.indexOf("Win") > -1;
+      if (win && document.querySelector("#sidenav-scrollbar")) {
+        var options = {
+          damping: "0.5",
+        };
+        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+      }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+    <script>
+      function passwordToggle() {
+          var x = document.getElementById("password");
+          if (x.type === "password") {
+              x.type = "text";
+          } else {
+              x.type = "password";
+          }
+      }
+    </script>
+  </body>
