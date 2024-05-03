@@ -5,10 +5,13 @@ require('../../config/passport/passport')(passport);
 
 const siteController = require('../../controllers/admin.c');
 
-router.post('/update-profile', siteController.updateProfileUpdated);
-router.get('/update-profile', siteController.updateProfile);
-router.get('/profile', siteController.profile);
-router.get('/home', siteController.home);
+router.post('/update-profile', isLoggedIn, siteController.updateProfileUpdated);
+router.get('/update-profile', isLoggedIn, siteController.updateProfile);
+router.get('/profile', isLoggedIn, siteController.profile);
+router.get('/home', isLoggedIn, siteController.home);
+
+
+router.get('/logout', isLoggedIn, siteController.logout);
 
 //Login
 router.get('/login', siteController.login);
@@ -23,7 +26,7 @@ router.post('/login',
 
 //Signup new customer
 // router.post('/signup/available', siteController.avalable);
-router.get('/signup', siteController.signup);
+router.get('/signup', isLoggedIn, siteController.signup);
 router.post('/signup',
     passport.authenticate('local-signup', { failureRedirect: './signup?status=failed' }),
     function (req, res) {
@@ -34,6 +37,8 @@ router.post('/signup',
 );
 
 router.get('/', isLoggedIn ,siteController.home);
+
+router.get(/.*/, isLoggedIn, siteController.home)
 
 function isLoggedIn(req, res, next) {
 
