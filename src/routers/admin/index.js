@@ -5,6 +5,11 @@ require('../../config/passport/passport')(passport);
 
 const siteController = require('../../controllers/admin.c');
 
+router.post('/update-profile', siteController.updateProfileUpdated);
+router.get('/update-profile', siteController.updateProfile);
+router.get('/profile', siteController.profile);
+router.get('/home', siteController.home);
+
 //Login
 router.get('/login', siteController.login);
 router.post('/login',
@@ -28,6 +33,8 @@ router.post('/signup',
     }
 );
 
+router.get('/', isLoggedIn ,siteController.home);
+
 function isLoggedIn(req, res, next) {
 
     console.log("Authenticate checking");
@@ -36,7 +43,7 @@ function isLoggedIn(req, res, next) {
     }
 
     // is not authenticated
-    res.redirect('/customer/login');
+    res.redirect('/login');
 }
 
 module.exports = router;

@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    <div class="pt-5">
+        <form method="POST" action="/update-profile">
+              <div class="row">
+                <div class="col-md-12 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="fullname" class="form-control form-control-lg bg-light" name="fullname" value="{{currAdmin.fullname}}" required/>
+                    <label class="form-label" for="fullname">Full Name</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="tel" id="phone" class="form-control form-control-lg bg-light" pattern="+[0-9]{11}" name="phone" value="{{currAdmin.tel}}" required/>
+                    <label class="form-label" for="phone">Phone Number</label>
+                  </div>
+
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="text" id="username" class="form-control form-control-lg bg-light" name="username" required/>
+                    <label class="form-label" for="username">Enter username for authentication</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="password" id="password" class="form-control form-control-lg bg-light" name="password" required/>
+                    <label class="form-label" for="password">Enter password for authentication</label>
+                    <div>
+                      <input type="checkbox" onclick="passwordToggle('password')">Show Password
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="text-center mb-5">
+                <button type="submit" class="btn btn-primary">Accept change</button>
+              </div>
+    </form>
+    </div>
+</div>
