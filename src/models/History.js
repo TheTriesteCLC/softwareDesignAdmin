@@ -7,8 +7,7 @@ const History = new Schema({
   vehicle: { type: String, required: true },
   start: { type: String, required: true },
   destination: { type: String, required: true },
-  fee: {type: String, required: true},
-  time: {type: String, required: true}
+  fee: {type: String, required: true}
 }, {
   timestamps: true,
 });
