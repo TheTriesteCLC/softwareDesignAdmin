@@ -27,11 +27,28 @@ class siteController {
     res.render('signup', { layout: 'customSignin' });
   }
 
+/////////////////////////////////////////////////
   //[GET] /dashboard
   dashboard(req, res) {
     res.render('dashboard', { layout: 'main' });
   }
 
+  //[GET] /customers
+  customers(req, res) {
+    res.render('customers', { layout: 'main' });
+  }
+    
+  //[GET] /drivers
+  drivers(req, res) {
+    res.render('drivers', { layout: 'main' });
+  }
+
+  //[GET] /cabs
+  cabs(req, res) {
+    res.render('cabs', { layout: 'main' });
+  }
+
+/////////////////////////////////////////////////
   //[GET] /profile
   profile(req, res) {
 
@@ -77,6 +94,7 @@ class siteController {
   }
 }
 
+/////////////////////////////////////////////////
 const slugify = (textToSlugify) => {
   if (!textToSlugify) return '';
 

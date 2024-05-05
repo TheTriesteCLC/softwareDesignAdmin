@@ -8,9 +8,12 @@ const siteController = require('../../controllers/admin.c');
 router.post('/update-profile', isLoggedIn, siteController.updateProfileUpdated);
 router.get('/update-profile', isLoggedIn, siteController.updateProfile);
 router.get('/profile', isLoggedIn, siteController.profile);
+/////////////////////////////////////////////////
 router.get('/dashboard', isLoggedIn, siteController.dashboard);
-
-
+router.get('/customers', isLoggedIn, siteController.customers);
+router.get('/drivers', isLoggedIn, siteController.drivers);
+router.get('/cabs', isLoggedIn, siteController.cabs);
+/////////////////////////////////////////////////
 router.get('/logout', isLoggedIn, siteController.logout);
 
 //Login
@@ -36,10 +39,10 @@ router.post('/signup',
     }
 );
 
+/////////////////////////////////////////////////
 router.get('/', isLoggedIn ,siteController.dashboard);
-
 router.get(/.*/, isLoggedIn, siteController.dashboard)
-
+/////////////////////////////////////////////////
 function isLoggedIn(req, res, next) {
 
     console.log("Authenticate checking");
