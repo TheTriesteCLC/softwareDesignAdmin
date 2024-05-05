@@ -8,7 +8,7 @@ const siteController = require('../../controllers/admin.c');
 router.post('/update-profile', isLoggedIn, siteController.updateProfileUpdated);
 router.get('/update-profile', isLoggedIn, siteController.updateProfile);
 router.get('/profile', isLoggedIn, siteController.profile);
-router.get('/home', isLoggedIn, siteController.home);
+router.get('/dashboard', isLoggedIn, siteController.dashboard);
 
 
 router.get('/logout', isLoggedIn, siteController.logout);
@@ -20,7 +20,7 @@ router.post('/login',
     function (req, res) {
         console.log("redirecting");
         console.log(req.user);
-        res.redirect('./home');
+        res.redirect('./dashboard');
     }
 );
 
@@ -32,13 +32,13 @@ router.post('/signup',
     function (req, res) {
         console.log("redirecting");
         console.log(req.user);
-        res.redirect('./home');
+        res.redirect('./dashboard');
     }
 );
 
-router.get('/', isLoggedIn ,siteController.home);
+router.get('/', isLoggedIn ,siteController.dashboard);
 
-router.get(/.*/, isLoggedIn, siteController.home)
+router.get(/.*/, isLoggedIn, siteController.dashboard)
 
 function isLoggedIn(req, res, next) {
 

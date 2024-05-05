@@ -27,9 +27,9 @@ class siteController {
     res.render('signup', { layout: 'customSignin' });
   }
 
-  //[GET] /home
-  home(req, res) {
-    res.render('home', { layout: 'main' });
+  //[GET] /dashboard
+  dashboard(req, res) {
+    res.render('dashboard', { layout: 'main' });
   }
 
   //[GET] /profile
