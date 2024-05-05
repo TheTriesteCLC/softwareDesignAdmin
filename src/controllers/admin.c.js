@@ -1,4 +1,7 @@
 const Admin = require('../models/Admin');
+const Customer = require('../models/Customer');
+const Driver = require('../models/Driver');
+const History = require('../models/History');
 const { multipleMongooseToObject, singleMongooseToObject } = require('../util/mongoose');
 
 class siteController {
@@ -34,18 +37,21 @@ class siteController {
   }
 
   //[GET] /customers
-  customers(req, res) {
-    res.render('customers', { layout: 'main' });
+  async customers(req, res) {
+    let customerList = await Customer.find({}).lean().sort({"username": 1});
+    res.render('customers', { layout: 'main', customers: customerList });
   }
     
   //[GET] /drivers
-  drivers(req, res) {
-    res.render('drivers', { layout: 'main' });
+  async drivers(req, res) {
+    let driverList = await Driver.find({}).lean().sort({"username": 1});
+    res.render('drivers', { layout: 'main', drivers: driverList });
   }
 
   //[GET] /cabs
-  cabs(req, res) {
-    res.render('cabs', { layout: 'main' });
+  async cabs(req, res) {
+    let cabList = await History.find({}).lean().sort({"time": -1});
+    res.render('cabs', { layout: 'main', cabs: cabList });
   }
 
 /////////////////////////////////////////////////

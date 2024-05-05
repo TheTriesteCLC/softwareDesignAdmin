@@ -1,0 +1,331 @@
+{{!-- JQUERY --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="d-flex justify-content-between bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 px-3">
+                <div id="users-title">
+                  <h6 class="text-white text-capitalize"> Customers</h6>
+                </div>
+
+                <div class="d-flex">
+                  <div class="dropdown d-inline ms-5">
+                      <button class="btn btn-info dropdown-toggle mb-0" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-target=".sortDropdown">
+                        Sort
+                      </button>
+                      <ul class="dropdown-menu sortDropdown">
+                        <li><a class="dropdown-item users-filter" type="sorter" name="fullname" value = "1" href="">Name</a></li>
+                        <li><a class="dropdown-item users-filter" type="sorter" name="email" value = "1" href="">Email</a></li>
+                        <li><a class="dropdown-item users-filter" type="sorter" name="createdAt" value = "1" href="">Registration time</a></li>
+                      </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Information</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created date</th>
+                      <th class="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="users-list">
+                    
+                    {{#each customers}}
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div>
+                              <img src="../assets/img/adminPicture/defaultAVT.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">{{this.fullname}}</h6>
+                              <p class="text-xs text-secondary mb-0">Username: {{this.username}}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-xs font-weight-bold mb-0">{{this.email}}</p>
+                          <p class="text-xs text-secondary mb-0">{{this.tel}}</p>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-primary">{{this.status}}</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">{{this.createdAt}}</span>
+                        </td>
+                        <td class="align-middle">
+                          <a href="/admin/tables/user/{{this.slug}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                            View profile
+                          </a>
+                        </td>
+                      </tr>
+                    {{/each}} 
+                    
+                  </tbody>
+                </table>
+                
+                <div class="d-flex flex-row justify-content-center gap-4">
+                  <button class="btn btn-info d-inline mb-0 prev" value="users" id="user-prev">
+                      Prev
+                  </button>
+                  <div id="user-paging">
+                    <h4> {{page}} </h4>
+                  </div>  
+                  
+                  <button class="btn btn-info d-inline mb-0 next" value="users" id="user-next">
+                      Next
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{{!-- Template for products --}}
+<script type="text/x-handlebars-template" id = "titleProducts-holder">
+  <h6 class="text-white text-capitalize d-inline me-5">\{{titleProducts}}</h6>
+</script>
+<script type="text/x-handlebars-template" id = "products-holder">
+  \{{#each products}}
+      <tr>
+        <td>
+          <div class="d-flex px-2">
+            <div>
+              <img src="../assets/img/adminPicture/\{{this.image}}" class="avatar avatar-sm rounded-circle me-2" alt="invision">
+            </div>
+            <div class="my-auto">
+              <h6 class="mb-0 text-sm">\{{this.name}}</h6>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p class="text-sm font-weight-bold mb-0">$\{{this.price}}</p>
+        </td>
+        <td>
+          <p class="text-sm font-weight-bold mb-0">\{{this.stock}}</p>
+        </td>
+        <td>
+          <span class="text-xs font-weight-bold">\{{this.status}}</span>
+        </td>
+        <td class="align-middle text-center">
+          \{{#each this.category}}
+            <p class="text-xs font-weight-bold">\{{this}}</p>
+          \{{/each}}
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-xs font-weight-bold">\{{this.from}}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-xs font-weight-bold">\{{this.date}}</span>
+        </td>
+        <td class="align-middle">
+          <a href="/admin/tables/product/\{{this.slug}}">
+            <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-ellipsis-v text-xs"></i>
+            </button>
+          </a>
+        </td>
+      </tr>
+    \{{/each}}
+</script>
+
+{{!-- Ajax script --}}
+<script>
+  var userPage = 1;
+  var productPage = 1;
+  var userCondition ='';
+  var userSortBy ='';
+  var prodCondition ='';
+  var prodSortBy ='';
+
+  $(document).ready(function(){
+
+    $.ajax({
+      type: "GET",
+      url: document.URL + '/?getall=users&page=1' ,
+      success: function(response){
+        //alert('Start users');
+        handleResponseUsers(response);
+      },
+      error: function(err){
+        console.log(err);
+        //alert('Failed1 users');
+      }
+    });    
+
+    $.ajax({
+      type: "GET",
+      url: document.URL + '/?getall=products&page=1',
+      success: function(response){
+        //alert('Start products');
+        handleResponseProducts(response);
+      },
+      error: function(err){
+        console.log(err);
+        //alert('Failed1 products');
+      }
+    });  
+  });
+  
+</script>
+<script>
+  $('.users-filter, .products-filter').on('click', function(e){
+    e.preventDefault();
+    var getItems;
+    if (this.getAttribute('class').indexOf('users-filter') > 0) {
+      getItems = 'users';
+    } else {
+      getItems = 'products';
+    }
+
+    var value = this.getAttribute('value');
+    var field = this.getAttribute('name');
+    var type = this.getAttribute('type');
+    var thisPage = 1;
+    var thisCondition = '';
+    var thisSortBy = '';
+
+    // Page
+    if (getItems == 'users'){
+      userPage = thisPage;
+    } else {
+      productPage = thisPage;
+    }
+    
+    // Condition
+    if (type == 'filter'){
+      if (value =='none') {
+        thisCondition = '';
+      } else{
+        thisCondition = '&condition={"' + field +'":"'+ value +'"}';
+      }
+
+      // update
+      if (getItems == 'users'){
+        userCondition = thisCondition;
+        thisSortBy = userSortBy;
+      } else {
+        prodCondition = thisCondition;
+        thisSortBy = prodSortBy;
+      }
+    }
+
+    // SortBy
+    if (type == 'sorter'){
+      thisSortBy = '&sortBy={"' + field +'":'+ value +'}';
+
+      // update
+      if (getItems == 'users'){
+        userSortBy = thisSortBy;
+        thisCondition = userCondition;
+      } else {
+        prodSortBy = thisSortBy;
+        thisCondition = prodCondition;
+      }
+    }
+
+    $.ajax({
+      type: "GET",
+      url: document.URL + '/?getall=' + getItems + '&page=' + thisPage + thisCondition + thisSortBy,
+      success: function(response){
+        console.log(response);
+        if (getItems == 'users'){
+          handleResponseUsers(response);
+        } else handleResponseProducts(response);     
+
+      },
+      error: function(err){
+        console.log(err);
+        //alert('Failed2');
+      }
+    });    
+  });
+</script>
+<script>
+
+  $('.next').on('click', function(e){
+    e.preventDefault();
+    var page;
+    var value = this.getAttribute("value") ;
+    var thisCondition = '';
+    var thisSortBy = '';
+
+    if (value === "users"){
+      page = userPage + 1;
+      thisCondition = userCondition;
+      thisSortBy = userSortBy;
+    } else {
+      page = productPage + 1;
+      thisCondition = prodCondition;
+      thisSortBy = prodSortBy;
+    }
+
+    $.ajax({
+      type: "GET",
+      url: document.URL + '?getall=' + value + '&page=' + page + thisCondition + thisSortBy,
+      success: function(response){
+        console.log(response);
+        if (value === "users"){
+          handleResponseUsers(response);
+        } else {
+          handleResponseProducts(response);
+        }
+      },
+      error: function(err){
+        console.log(err);
+        alert('Failed');
+      }
+    });   
+  });
+
+  $('.prev').on('click', function(e){
+    e.preventDefault();
+    var page;
+    var value = this.getAttribute("value") ;
+    var thisCondition = '';
+    var thisSortBy = '';
+
+    if (value === "users"){
+      page = userPage;
+      if (page > 1) {
+        page = page - 1;
+      }
+      thisCondition = userCondition;
+      thisSortBy = userSortBy;
+    } else {
+      page = productPage;
+      if (page > 1) {
+        page = page - 1;
+      }
+      thisCondition = prodCondition;
+      thisSortBy = prodSortBy;
+    }
+
+    $.ajax({
+      type: "GET",
+      url: document.URL + '?getall=' + value + '&page=' + page + thisCondition + thisSortBy,
+      success: function(response){
+        //alert('Start users');
+        if (value === "users"){
+          handleResponseUsers(response);
+        } else {
+          handleResponseProducts(response);
+        }
+      },
+      error: function(err){
+        console.log(err);
+        //alert('Failed1 users');
+      }
+    });    
+  });
+
+</script>
