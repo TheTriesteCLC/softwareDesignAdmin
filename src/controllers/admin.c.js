@@ -38,13 +38,15 @@ class siteController {
 
   //[GET] /customers
   async customers(req, res) {
-    let customerList = await Customer.find({}).lean().sort({"username": 1});
+    let customerList = await Customer.find().sort({"username" : 1}).lean();
+    customerList = await formatDate(customerList);
     res.render('customers', { layout: 'main', customers: customerList });
   }
     
   //[GET] /drivers
   async drivers(req, res) {
     let driverList = await Driver.find({}).lean().sort({"username": 1});
+    driverList = await formatDate(driverList);
     res.render('drivers', { layout: 'main', drivers: driverList });
   }
 
@@ -60,9 +62,14 @@ class siteController {
       select: "fullname username",
       model:'Driver'
     }).lean().sort({"time": -1});
+
+    cabList = await formatDate(cabList);
+
     res.render('cabs', { layout: 'main', cabs: cabList });
   }
 
+
+  
 /////////////////////////////////////////////////
   //[GET] /profile
   profile(req, res) {
@@ -119,3 +126,14 @@ const slugify = (textToSlugify) => {
 }
 
 module.exports = new siteController;
+
+function formatDate(list){
+  list = list.map(item => {
+    const date = new Date(item.createdAt);
+    const formattedDate = date.toISOString().slice(0, 10); // Format as "YYYY-MM-DD"
+    const formattedTime = `${date.getHours()}:${date.getMinutes()}`; // Format as "HH:MM"
+    item.formattedDateTime = `${formattedDate} ${formattedTime}`; // Combine date and time
+    return item;
+  });
+  return list;
+}
