@@ -50,7 +50,16 @@ class siteController {
 
   //[GET] /cabs
   async cabs(req, res) {
-    let cabList = await History.find({}).lean().sort({"time": -1});
+    let cabList = await History.find({}).populate({
+      path:"customerId",
+      select: "fullname username",
+      model:'Customer'
+    })
+    .populate({
+      path:"driverId",
+      select: "fullname username",
+      model:'Driver'
+    }).lean().sort({"time": -1});
     res.render('cabs', { layout: 'main', cabs: cabList });
   }
 
