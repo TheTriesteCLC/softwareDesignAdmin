@@ -9,6 +9,7 @@ router.post('/update-profile', isLoggedIn, siteController.updateProfileUpdated);
 router.get('/update-profile', isLoggedIn, siteController.updateProfile);
 router.get('/profile', isLoggedIn, siteController.profile);
 /////////////////////////////////////////////////
+router.post('/dashboard/time', isLoggedIn, siteController.dashboardTime);
 router.get('/dashboard', isLoggedIn, siteController.dashboard);
 router.get('/customers', isLoggedIn, siteController.customers);
 router.get('/drivers', isLoggedIn, siteController.drivers);

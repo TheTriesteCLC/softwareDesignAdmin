@@ -19,7 +19,7 @@
 <div class="card  mb-2">
   <div class="card-header p-3 pt-2">
     <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-xl mt-n4 position-absolute">
-      <i class="material-icons opacity-10">weekend</i>
+      <i class="material-icons opacity-10">payments</i>
     </div>
     <div class="text-end pt-1">
       <p class="text-sm mb-0 text-capitalize">Total Revenue</p>
@@ -31,11 +31,11 @@
 <div class="card  mb-2">
   <div class="card-header p-3 pt-2">
     <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary shadow text-center border-radius-xl mt-n4 position-absolute">
-      <i class="material-icons opacity-10">leaderboard</i>
+      <i class="material-icons opacity-10">person</i>
     </div>
     <div class="text-end pt-1">
-      <p class="text-sm mb-0 text-capitalize">Total users</p>
-      <h4 class="mb-0">{{totalUser}}</h4>
+      <p class="text-sm mb-0 text-capitalize">Total customer</p>
+      <h4 class="mb-0">{{totalCustomer}}</h4>
     </div>
   </div>
 
@@ -46,11 +46,11 @@
         <div class="card  mb-2">
   <div class="card-header p-3 pt-2 bg-transparent">
     <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-      <i class="material-icons opacity-10">store</i>
+      <i class="material-icons opacity-10">local_taxi</i>
     </div>
     <div class="text-end pt-1">
-      <p class="text-sm mb-0 text-capitalize ">Total orders</p>
-      <h4 class="mb-0 ">{{totalOrder}}</h4>
+      <p class="text-sm mb-0 text-capitalize ">Total cab</p>
+      <h4 class="mb-0 ">{{totalCab}}</h4>
     </div>
   </div>
 </div>
@@ -58,11 +58,11 @@
 <div class="card ">
   <div class="card-header p-3 pt-2 bg-transparent">
     <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-      <i class="material-icons opacity-10">person_add</i>
+      <i class="material-icons opacity-10">person</i>
     </div>
     <div class="text-end pt-1">
-      <p class="text-sm mb-0 text-capitalize ">Total products</p>
-      <h4 class="mb-0 ">{{totalProduct}}</h4>
+      <p class="text-sm mb-0 text-capitalize ">Total driver</p>
+      <h4 class="mb-0 ">{{totalDriver}}</h4>
     </div>
   </div>
 </div>
@@ -225,27 +225,27 @@
 
       </div>
     </div> --}}
-  <form method="POST" action="/admin/dashboard/time">
-              <div class="row">
-                <h5>Filtered by time</h5>
-                <div class="col-md-5 mb-4 me-4">
+  <form method="POST" action="/dashboard/time">
+      <div class="row">
+        <h5>Filtered by time</h5>
+        <div class="col-md-5 mb-4 me-4">
 
-                  <div class="form-outline">
-                    <input type="date" id="startDate" class="form-control form-control-lg bg-light today" name="startDate" required/>
-                    <label class="form-label" for="startDate">Start</label>
-                  </div>
+          <div class="form-outline">
+            <input type="date" id="startDate" class="form-control form-control-lg bg-light today" name="startDate" required/>
+            <label class="form-label" for="startDate">Start</label>
+          </div>
 
-                </div>
-                <div class="col-md-5 mb-4">
+        </div>
+        <div class="col-md-5 mb-4">
 
-                  <div class="form-outline">
-                    <input type="date" id="endDate" class="form-control form-control-lg bg-light tomorrow" name="endDate" required/>
-                    <label class="form-label" for="endDate">End</label>
-                  </div>
+          <div class="form-outline">
+            <input type="date" id="endDate" class="form-control form-control-lg bg-light tomorrow" name="endDate" required/>
+            <label class="form-label" for="endDate">End</label>
+          </div>
 
-                </div>
-                <button type="submit" class="col-md-6 btn btn-info" >Apply filtered</button>
-              </div>
+        </div>
+        <button type="submit" class="col-md-6 btn btn-info" >Apply filtered</button>
+      </div>
     </form>
   </div>
 </div>

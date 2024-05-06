@@ -32,8 +32,79 @@ class siteController {
 
 /////////////////////////////////////////////////
   //[GET] /dashboard
-  dashboard(req, res) {
-    res.render('dashboard', { layout: 'main' });
+  async dashboard(req, res) {    
+    let totalCab = 0;
+    let totalRevenue = 0;
+    let totalCustomer = 0;
+    let totalDriver = 0;
+
+    await Customer.find({}).lean()
+    .then(customers => {
+      totalCustomer = customers.length;
+    });
+
+    await Driver.find({}).lean()
+    .then(drivers => {
+      totalDriver = drivers.length;
+    });
+
+    await History.find({}).lean()
+    .then(async cabs => {
+      totalCab = cabs.length;
+
+      cabs.forEach(cab => {
+        totalRevenue += parseFloat(cab.fee);
+      });
+      res.render('dashboard', { layout: 'main', title: 'All time statistics', totalCab, totalRevenue, totalCustomer, totalDriver });
+    });
+  }
+
+  //[POST] /dashboard/time
+  async dashboardTime(req, res, next) {
+    console.log("in");
+    let totalCab = 0;
+    let totalRevenue = 0;
+    let totalCustomer = 0;
+    let totalDriver = 0;
+
+    const formData = req.body;
+
+    await Customer.find({
+      createdAt: {
+        $gte: new Date(Date.parse(formData.startDate)),
+        $lte: new Date(Date.parse(formData.endDate))
+      }
+    }).lean()
+    .then(customers => {
+      totalCustomer = customers.length;
+    });
+
+    await Driver.find({
+      createdAt: {
+        $gte: new Date(Date.parse(formData.startDate)),
+        $lte: new Date(Date.parse(formData.endDate))
+      }
+    }).lean()
+    .then(drivers => {
+      totalDriver = drivers.length;
+    });
+
+    await History.find({
+      createdAt: {
+        $gte: new Date(Date.parse(formData.startDate)),
+        $lte: new Date(Date.parse(formData.endDate))
+      }
+    }).lean()
+    .then(async cabs => {
+      totalCab = cabs.length;
+
+      cabs.forEach(cab => {
+        totalRevenue += parseFloat(cab.fee);
+      });
+
+      console.log("Start");
+      res.render('dashboard', { layout: 'main', title: `From ${formData.startDate} to ${formData.endDate}`, totalCab, totalRevenue, totalCustomer, totalDriver });
+    });
   }
 
   //[GET] /customers
