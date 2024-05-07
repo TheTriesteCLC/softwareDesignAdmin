@@ -13,6 +13,7 @@ router.post('/dashboard/time', isLoggedIn, siteController.dashboardTime);
 router.get('/dashboard', isLoggedIn, siteController.dashboard);
 router.get('/customers', isLoggedIn, siteController.customers);
 router.get('/drivers', isLoggedIn, siteController.drivers);
+router.get('/new-cabs', isLoggedIn, siteController.newCabs);
 router.get('/cabs', isLoggedIn, siteController.cabs);
 /////////////////////////////////////////////////
 router.get('/logout', isLoggedIn, siteController.logout);

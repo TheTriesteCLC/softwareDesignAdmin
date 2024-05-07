@@ -1,0 +1,158 @@
+<div id="map">
+    {{!-- <div class="leaflet-bottom leaflet-right">
+        <button style="background-color: #4557bb; border: none; color: white; padding: 10px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 20px; border-radius: 40%; pointer-events: auto;" id="my-loc">
+            <i class="fa fa-bullseye" aria-hidden="true"></i>
+        </button>
+    </div> --}}
+</div>
+
+<div style="position: relative;" class="sing-up">
+    <div>
+        <div class="create-an-account">Booking</div>
+        <div style="display: flex; align-items: center; flex-direction: column">
+            <div class="group-61">
+                <label class="name" for="input-start-cabs">Start point</label>
+                <input class="input" type="text" id="input-start-cabs" name="start-cabs" placeholder="Click on map to choose pickup location" required readonly>
+            </div>
+             <div class="group-61">
+                <label class="name" for="input-end-cabs">Destination</label>
+                <input class="input" type="text" id="input-end-cabs" name="end-cabs" placeholder="Drag map to choose destination" required readonly>
+            </div>
+        </div>
+        <div>
+            
+        </div>
+        <div style="display: flex; align-items: center; flex-direction: column">
+            <div class="group-61">
+                <label class="name" for="input-vehicle">Vehicle type:</label>
+                <select class="input" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="vehicle" id="input-vehicle" required>
+                    <option value="Motorcycle">Motorcycle</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="MPV">MPV</option>
+                </select>
+            </div>
+        </div>
+        <button class="sing-up-1 group-33 btnBook"> Book </button>
+    </div>
+</div>
+{{!-- <button id="center-loc">Mark center</button> --}}
+
+<script>
+    let socket = io('//localhost:3000');
+
+    const users = JSON.parse('{{{user}}}');
+    let startPoint = {}
+    let endPoint = {}
+
+    // Map initialization 
+    var map = L.map('map').setView([10.762622, 106.660172], 12);
+
+    /* Initialise Reverse Geocode API Client */
+    var reverseGeocoder=new BDCReverseGeocode();
+    reverseGeocoder.localityLanguage='vi';
+
+    //Set up routing machine
+    L.Routing.control({ createMarker: function() { return null; } });
+
+    //osm layer
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    osm.addTo(map);
+
+    //L.control.locate().addTo(map);
+
+    //L.DomEvent.on(document.getElementById('my-loc'), 'click', function(){
+    //    map.locate({setView: true, maxZoom: 16});
+    //})
+
+    const currentLocIcon = L.icon({
+        iconUrl: 'https://img.icons8.com/fluency/48/map-pin.png',
+
+        iconSize:     [50, 50], // size of the icon
+        iconAnchor:   [25, 50], // point of the icon which will correspond to marker's location
+        popupAnchor:  [0, -50] // point from which the popup should open relative to the iconAnchor
+    });
+    const destinationLocIcon = L.icon({
+        iconUrl: 'https://img.icons8.com/ultraviolet/40/filled-flag2.png',
+
+        iconSize:     [40, 40], // size of the icon
+        iconAnchor:   [5, 45], // point of the icon which will correspond to marker's location
+    });
+
+    var currentLatlong;
+    var centerMarker = new L.marker(map.getCenter(), {icon: destinationLocIcon}).addTo(map);
+    var startMarker;
+
+    function pickStartPoint(e) {
+        if(startMarker === undefined) {
+            startMarker = L.marker(e.latlng, {icon: currentLocIcon}).addTo(map)
+            .bindPopup("Start point").openPopup();
+        }else {
+            startMarker.setLatLng(e.latlng);
+            startMarker.bindPopup("Start point").openPopup();
+        }
+
+        reverseGeocoder.getClientLocation({
+            latitude: e.latlng.lat,
+            longitude: e.latlng.lng
+        },function(result) {
+            document.getElementById('input-start-cabs').value = `${result.plusCode}, ${result.locality}, ${result.city}, ${result.countryName}`;
+            startPoint.latitude = result.latitude       
+            startPoint.longitude = result.longitude    
+            startPoint.value = `${result.plusCode}, ${result.locality}, ${result.city}, ${result.countryName}`
+        });
+        //L.circle(e.latlng, radius).addTo(map);
+    }
+
+
+    function geoCodingEndPoint() {
+        reverseGeocoder.getClientLocation({
+            latitude: map.getCenter().lat,
+            longitude: map.getCenter().lng
+        },function(result) {
+            document.getElementById('input-end-cabs').value = `${result.plusCode}, ${result.locality}, ${result.city}, ${result.countryName}`;
+            endPoint.latitude = result.latitude       
+            endPoint.longitude = result.longitude  
+            endPoint.value = `${result.plusCode}, ${result.locality}, ${result.city}, ${result.countryName}`
+        })
+    }
+
+    map.on("move", function () {
+        centerMarker.setLatLng(map.getCenter());
+    });
+
+    map.on("moveend", geoCodingEndPoint);
+
+    map.on('click', pickStartPoint);
+
+    function markCenter(e) {
+        var currentMarker = L.marker(map.getCenter()).addTo(map);
+    }
+
+    document.querySelector(".btnBook").addEventListener("click", function() {
+        socket.emit('requestUser', { id: users._id, start: startPoint, end: endPoint});
+
+        map.off("moveend", geoCodingEndPoint);
+        //map.dragging.disable();
+
+        map.setView([(startPoint.latitude + endPoint.latitude) / 2,
+         (startPoint.longitude + endPoint.longitude) / 2], 12);
+
+        L.Routing.control({
+            waypoints: [
+                L.latLng(startPoint.latitude, startPoint.longitude),
+                L.latLng(endPoint.latitude, endPoint.longitude)
+            ],
+            routeWhileDragging: true,
+            createMarker: function() { return null; }
+        }).addTo(map);
+
+        map.removeLayer(centerMarker);
+
+        L.marker(L.latLng(endPoint.latitude, endPoint.longitude), {icon: destinationLocIcon}).addTo(map)
+            .bindPopup("Destination").openPopup();
+    })
+
+</script>

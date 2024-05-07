@@ -1,0 +1,340 @@
+.sing-up .rectangle-43 {
+  position: absolute;
+  left: 50%;
+  top: 0px;
+  translate: -50% 0;
+  width: 375px;
+  height: 91px;
+}
+.sing-up .container {
+  overflow-wrap: break-word;
+  font-family: 'Roboto Black', 'Roboto Condensed';
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: -0.3px;
+  color: #FFFFFF;
+}
+.sing-up .time-style {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.sing-up .mobile-signal {
+  margin: 0.3px 5px 0.3px 0;
+  width: 17px;
+  height: 10.7px;
+}
+.sing-up .wifi {
+  margin: 0 5px 0.4px 0;
+  width: 15.3px;
+  height: 11px;
+}
+.sing-up .battery {
+  margin-top: 0px;
+  width: 24.3px;
+  height: 11.3px;
+}
+.sing-up .container-2 {
+  margin: 3.3px 0;
+  display: flex;
+  flex-direction: row;
+  width: 66.7px;
+  height: fit-content;
+  box-sizing: border-box;
+}
+.sing-up .ui-bars-status-bars-white-base {
+  position: relative;
+  margin: 0 14.7px 42px 35.6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: calc(100% - 50.3px);
+  box-sizing: border-box;
+}
+.sing-up .create-an-account {
+  position: relative;
+  margin: 0 20px 15px 20px;
+  justify-content: center;
+  display: inline-block;
+  align-self: flex-start;
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 28px;
+  color: #FFFFFF;
+}
+.sing-up .name {
+  margin-bottom: 5px;
+  display: inline-block;
+  align-self: flex-start;
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.sing-up .input {
+  padding: 11px 16px;
+}
+
+.sing-up .tushar-chowdhury {
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 17px;
+  color: #545C9B;
+}
+.sing-up .container-1 {
+  border-radius: 2px;
+  border: 1px solid #545C9B;
+  background: #282F62;
+  position: relative;
+  padding: 11px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.sing-up .group-61 {
+  border-radius: 2px;
+  position: relative;
+  margin: 0 20px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 40px);
+  box-sizing: border-box;
+}
+
+.sing-up .infomation-box {
+  border: 2px solid white;
+  border-radius: 10px;
+  padding-top: 10px;
+  width: 95%;
+  margin-bottom: 20px;
+}
+
+.sing-up .infomation-box-title {
+  color: white;
+  font-weight: 700;
+  margin: 5px;
+}
+.sing-up .email-address {
+  margin-bottom: 20px;
+  display: inline-block;
+  align-self: flex-start;
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.sing-up .tusharch-911-gmail-com {
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 17px;
+  color: #545C9B;
+}
+.sing-up .container {
+  border-radius: 2px;
+  border: 1px solid #545C9B;
+  background: #282F62;
+  position: relative;
+  padding: 11px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.sing-up .group-62 {
+  border-radius: 2px;
+  position: relative;
+  margin: 0 20px 30px 20px;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 40px);
+  box-sizing: border-box;
+}
+.sing-up .inter-new-password {
+  margin-bottom: 20px;
+  display: inline-block;
+  align-self: flex-start;
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.sing-up .container-1 {
+  margin-right: 10px;
+  width: 277px;
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 17px;
+  color: #545C9B;
+}
+.sing-up .vector {
+  width: 16px;
+  height: 9.5px;
+}
+.sing-up .eye-1 {
+  margin: 2.2px 0 8.2px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 16px;
+  height: 9.5px;
+  box-sizing: border-box;
+}
+.sing-up .container-5 {
+  border-radius: 2px;
+  border: 1px solid #545C9B;
+  background: #282F62;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 14px 16px 8px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.sing-up .group-63 {
+  position: relative;
+  margin: 0 20px 30px 20px;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 40px);
+  box-sizing: border-box;
+}
+.sing-up .confirm-password {
+  margin-bottom: 20px;
+  display: inline-block;
+  align-self: flex-start;
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.sing-up .container-2 {
+  margin-right: 10px;
+  width: 277px;
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 17px;
+  color: #545C9B;
+}
+.sing-up .vector-1 {
+  width: 16px;
+  height: 9.5px;
+}
+.sing-up .eye-11 {
+  margin: 2.2px 0 8.2px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 16px;
+  height: 9.5px;
+  box-sizing: border-box;
+}
+.sing-up .container-4 {
+  border-radius: 2px;
+  border: 1px solid #545C9B;
+  background: #282F62;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 14px 16px 8px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.sing-up .group-66 {
+  position: relative;
+  margin: 0 19px 40px 21px;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 40px);
+  box-sizing: border-box;
+}
+
+.sing-up #profile-image {
+  vertical-align: middle;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.sing-up .sing-up-1 {
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.294;
+  text-transform: uppercase;
+  color: #343B71;
+}
+.sing-up .group-33 {
+  border-radius: 10px;
+  background: #FFFFFF;
+  position: relative;
+  margin: 0 20px 30px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 11px 1px 11px 0;
+  width: calc(100% - 40px);
+  box-sizing: border-box;
+}
+.sing-up .already-have-an-account {
+  margin: 0 38px 20px 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #343B71;
+}
+.sing-up .sing-in {
+  overflow-wrap: break-word;
+  font-family: 'SF Pro Display', 'Roboto Condensed';
+  font-weight: 500;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: #545C9B;
+}
+.sing-up .group-117 {
+  border-radius: 2px;
+  border: 1px solid #B9BCDD;
+  background: #F9FAFF;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 11px 6.3px 11px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.sing-up .container-3 {
+  border-radius: 30px 30px 0 0;
+  background: #FFFFFF;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 31px 13px 30px 27px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.sing-up {
+  background: #343B71;
+  display: flex;
+  flex-direction: column;
+  padding-top: 14px;
+  box-sizing: border-box;
+}

@@ -139,6 +139,11 @@ class siteController {
     res.render('cabs', { layout: 'main', cabs: cabList });
   }
 
+  //[GET] /new-cabs
+  newCabs(req, res) {
+    res.render('newCabs', { layout: 'newCabs', user: JSON.stringify(req.user)});
+  }
+
 
   
 /////////////////////////////////////////////////
