@@ -211,7 +211,7 @@ class siteController {
 
   //[GET] /new-cabs
   newCabs(req, res) {
-    res.render('newCabs', { layout: 'newCabs', user: JSON.stringify(req.user)});
+    res.render('bookPreview', { layout: 'newCabs', user: JSON.stringify(req.user)});
   }
 
 
