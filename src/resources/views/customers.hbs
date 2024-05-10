@@ -15,9 +15,9 @@
                         Sort
                       </button>
                       <ul class="dropdown-menu sortDropdown">
-                        <li><a class="dropdown-item users-filter" type="sorter" name="fullname" value = "1" href="">Name</a></li>
-                        <li><a class="dropdown-item users-filter" type="sorter" name="email" value = "1" href="">Email</a></li>
-                        <li><a class="dropdown-item users-filter" type="sorter" name="createdAt" value = "1" href="">Registration time</a></li>
+                        <li><a class="dropdown-item users-filter" type="sorter" name="fullname" href="?sort=username&page=1">Name</a></li>
+                        <li><a class="dropdown-item users-filter" type="sorter" name="email" href="?sort=email&page=1">Email</a></li>
+                        <li><a class="dropdown-item users-filter" type="sorter" name="createdAt" href="?sort=createdAt&page=1">Registration time</a></li>
                       </ul>
                   </div>
                 </div>
@@ -72,260 +72,23 @@
                 </table>
                 
                 <div class="d-flex flex-row justify-content-center gap-4">
-                  <button class="btn btn-info d-inline mb-0 prev" value="users" id="user-prev">
-                      Prev
-                  </button>
+                  <a href="?sort={{sorter}}&page={{prevpage}}">
+                    <button class="btn btn-info d-inline mb-0 prev" >
+                        Prev
+                    </button>
+                  </a>
                   <div id="user-paging">
                     <h4> {{page}} </h4>
                   </div>  
                   
-                  <button class="btn btn-info d-inline mb-0 next" value="users" id="user-next">
-                      Next
-                  </button>
+                  <a href="?sort={{sorter}}&page={{prevpage}}">
+                    <button class="btn btn-info d-inline mb-0 next">
+                        Next
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-
-{{!-- Template for products --}}
-<script type="text/x-handlebars-template" id = "titleProducts-holder">
-  <h6 class="text-white text-capitalize d-inline me-5">\{{titleProducts}}</h6>
-</script>
-<script type="text/x-handlebars-template" id = "products-holder">
-  \{{#each products}}
-      <tr>
-        <td>
-          <div class="d-flex px-2">
-            <div>
-              <img src="../assets/img/adminPicture/\{{this.image}}" class="avatar avatar-sm rounded-circle me-2" alt="invision">
-            </div>
-            <div class="my-auto">
-              <h6 class="mb-0 text-sm">\{{this.name}}</h6>
-            </div>
-          </div>
-        </td>
-        <td>
-          <p class="text-sm font-weight-bold mb-0">$\{{this.price}}</p>
-        </td>
-        <td>
-          <p class="text-sm font-weight-bold mb-0">\{{this.stock}}</p>
-        </td>
-        <td>
-          <span class="text-xs font-weight-bold">\{{this.status}}</span>
-        </td>
-        <td class="align-middle text-center">
-          \{{#each this.category}}
-            <p class="text-xs font-weight-bold">\{{this}}</p>
-          \{{/each}}
-        </td>
-        <td class="align-middle text-center">
-          <span class="text-xs font-weight-bold">\{{this.from}}</span>
-        </td>
-        <td class="align-middle text-center">
-          <span class="text-xs font-weight-bold">\{{this.date}}</span>
-        </td>
-        <td class="align-middle">
-          <a href="/admin/tables/product/\{{this.slug}}">
-            <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-ellipsis-v text-xs"></i>
-            </button>
-          </a>
-        </td>
-      </tr>
-    \{{/each}}
-</script>
-
-{{!-- Ajax script --}}
-<script>
-  var userPage = 1;
-  var productPage = 1;
-  var userCondition ='';
-  var userSortBy ='';
-  var prodCondition ='';
-  var prodSortBy ='';
-
-  $(document).ready(function(){
-
-    $.ajax({
-      type: "GET",
-      url: document.URL + '/?getall=users&page=1' ,
-      success: function(response){
-        //alert('Start users');
-        handleResponseUsers(response);
-      },
-      error: function(err){
-        console.log(err);
-        //alert('Failed1 users');
-      }
-    });    
-
-    $.ajax({
-      type: "GET",
-      url: document.URL + '/?getall=products&page=1',
-      success: function(response){
-        //alert('Start products');
-        handleResponseProducts(response);
-      },
-      error: function(err){
-        console.log(err);
-        //alert('Failed1 products');
-      }
-    });  
-  });
-  
-</script>
-<script>
-  $('.users-filter, .products-filter').on('click', function(e){
-    e.preventDefault();
-    var getItems;
-    if (this.getAttribute('class').indexOf('users-filter') > 0) {
-      getItems = 'users';
-    } else {
-      getItems = 'products';
-    }
-
-    var value = this.getAttribute('value');
-    var field = this.getAttribute('name');
-    var type = this.getAttribute('type');
-    var thisPage = 1;
-    var thisCondition = '';
-    var thisSortBy = '';
-
-    // Page
-    if (getItems == 'users'){
-      userPage = thisPage;
-    } else {
-      productPage = thisPage;
-    }
-    
-    // Condition
-    if (type == 'filter'){
-      if (value =='none') {
-        thisCondition = '';
-      } else{
-        thisCondition = '&condition={"' + field +'":"'+ value +'"}';
-      }
-
-      // update
-      if (getItems == 'users'){
-        userCondition = thisCondition;
-        thisSortBy = userSortBy;
-      } else {
-        prodCondition = thisCondition;
-        thisSortBy = prodSortBy;
-      }
-    }
-
-    // SortBy
-    if (type == 'sorter'){
-      thisSortBy = '&sortBy={"' + field +'":'+ value +'}';
-
-      // update
-      if (getItems == 'users'){
-        userSortBy = thisSortBy;
-        thisCondition = userCondition;
-      } else {
-        prodSortBy = thisSortBy;
-        thisCondition = prodCondition;
-      }
-    }
-
-    $.ajax({
-      type: "GET",
-      url: document.URL + '/?getall=' + getItems + '&page=' + thisPage + thisCondition + thisSortBy,
-      success: function(response){
-        console.log(response);
-        if (getItems == 'users'){
-          handleResponseUsers(response);
-        } else handleResponseProducts(response);     
-
-      },
-      error: function(err){
-        console.log(err);
-        //alert('Failed2');
-      }
-    });    
-  });
-</script>
-<script>
-
-  $('.next').on('click', function(e){
-    e.preventDefault();
-    var page;
-    var value = this.getAttribute("value") ;
-    var thisCondition = '';
-    var thisSortBy = '';
-
-    if (value === "users"){
-      page = userPage + 1;
-      thisCondition = userCondition;
-      thisSortBy = userSortBy;
-    } else {
-      page = productPage + 1;
-      thisCondition = prodCondition;
-      thisSortBy = prodSortBy;
-    }
-
-    $.ajax({
-      type: "GET",
-      url: document.URL + '?getall=' + value + '&page=' + page + thisCondition + thisSortBy,
-      success: function(response){
-        console.log(response);
-        if (value === "users"){
-          handleResponseUsers(response);
-        } else {
-          handleResponseProducts(response);
-        }
-      },
-      error: function(err){
-        console.log(err);
-        alert('Failed');
-      }
-    });   
-  });
-
-  $('.prev').on('click', function(e){
-    e.preventDefault();
-    var page;
-    var value = this.getAttribute("value") ;
-    var thisCondition = '';
-    var thisSortBy = '';
-
-    if (value === "users"){
-      page = userPage;
-      if (page > 1) {
-        page = page - 1;
-      }
-      thisCondition = userCondition;
-      thisSortBy = userSortBy;
-    } else {
-      page = productPage;
-      if (page > 1) {
-        page = page - 1;
-      }
-      thisCondition = prodCondition;
-      thisSortBy = prodSortBy;
-    }
-
-    $.ajax({
-      type: "GET",
-      url: document.URL + '?getall=' + value + '&page=' + page + thisCondition + thisSortBy,
-      success: function(response){
-        //alert('Start users');
-        if (value === "users"){
-          handleResponseUsers(response);
-        } else {
-          handleResponseProducts(response);
-        }
-      },
-      error: function(err){
-        console.log(err);
-        //alert('Failed1 users');
-      }
-    });    
-  });
-
-</script>

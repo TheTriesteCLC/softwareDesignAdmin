@@ -3,6 +3,7 @@ const Customer = require('../models/Customer');
 const Driver = require('../models/Driver');
 const History = require('../models/History');
 const { multipleMongooseToObject, singleMongooseToObject } = require('../util/mongoose');
+const itemPerPage = 5;
 
 class siteController {
   //[GET] /login
@@ -109,34 +110,103 @@ class siteController {
 
   //[GET] /customers
   async customers(req, res) {
-    let customerList = await Customer.find().sort({"username" : 1}).lean();
+    var page, sorter;
+    var customerList;
+    var pagecount = await Customer.find().count();
+    pagecount = Math.ceil(pagecount / 5);
+
+
+    if (req.query.sort){
+      console.log("query no null");
+      page = req.query.page;
+      sorter= req.query.sort;
+      customerList = await Customer.find().sort(sorter).skip(itemPerPage*(page-1)).limit(itemPerPage).lean();
+    } else {
+      page = 1;
+      sorter = "username";
+      customerList = await Customer.find().sort(sorter).limit(itemPerPage).lean();
+    }
+
+    let prevpage = page - 1;
+    if (prevpage < 1) prevpage = 1;
+    let nextpage = page + 1;
+    if (nextpage > pagecount) nextpage = pagecount;
+
     customerList = await formatDate(customerList);
-    res.render('customers', { layout: 'main', customers: customerList });
+    res.render('customers', { layout: 'main', customers: customerList, page, sorter, prevpage, nextpage});
   }
     
   //[GET] /drivers
   async drivers(req, res) {
-    let driverList = await Driver.find({}).lean().sort({"username": 1});
+    var page, sorter;
+    var driverList;
+    var pagecount = await Driver.find().count();
+    pagecount = Math.ceil(pagecount / 5);
+
+    if (req.query.sort){
+      console.log("query no null");
+      page = req.query.page;
+      sorter= req.query.sort;
+      driverList = await Driver.find().sort(sorter).skip(itemPerPage*(page-1)).limit(itemPerPage).lean();
+    } else {
+      page = 1;
+      sorter = "username";
+      driverList = await Driver.find().sort(sorter).limit(itemPerPage).lean();
+    }
+
+    let prevpage = page - 1;
+    if (prevpage < 1) prevpage = 1;
+    let nextpage = page + 1;
+    if (nextpage > pagecount) nextpage = pagecount;
+
     driverList = await formatDate(driverList);
-    res.render('drivers', { layout: 'main', drivers: driverList });
+    res.render('drivers', { layout: 'main', drivers: driverList, page, sorter, prevpage, nextpage });
   }
 
   //[GET] /cabs
   async cabs(req, res) {
-    let cabList = await History.find({}).populate({
-      path:"customerId",
-      select: "fullname username",
-      model:'Customer'
-    })
-    .populate({
-      path:"driverId",
-      select: "fullname username",
-      model:'Driver'
-    }).lean().sort({"time": -1});
+    var page, sorter;
+    var cabList;
+    var pagecount = await History.find().count();
+    pagecount = Math.ceil(pagecount / 5);
+
+    if (req.query.page){
+      console.log("query no null");
+      page = req.query.page;
+
+      cabList = await History.find({}).populate({
+        path:"customerId",
+        select: "fullname username",
+        model:'Customer'
+      })
+      .populate({
+        path:"driverId",
+        select: "fullname username",
+        model:'Driver'
+      }).sort({"createdAt": -1}).skip(itemPerPage*(page-1)).limit(itemPerPage).lean();
+    } else {
+      page = 1;
+
+      cabList = await History.find({}).populate({
+        path:"customerId",
+        select: "fullname username",
+        model:'Customer'
+      })
+      .populate({
+        path:"driverId",
+        select: "fullname username",
+        model:'Driver'
+      }).lean().sort({"createdAt": -1}).limit(itemPerPage);
+    }
+
+    let prevpage = page - 1;
+    if (prevpage < 1) prevpage = 1;
+    let nextpage = page + 1;
+    if (nextpage > pagecount) nextpage = pagecount;
 
     cabList = await formatDate(cabList);
 
-    res.render('cabs', { layout: 'main', cabs: cabList });
+    res.render('cabs', { layout: 'main', cabs: cabList, page, prevpage, nextpage });
   }
 
   //[GET] /new-cabs

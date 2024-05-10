@@ -19,7 +19,7 @@
                         <li><a class="dropdown-item users-filter" type="sorter" name="createdAt" value = "1" href="">Registration time</a></li>
                       </ul>
                   </div>
-                </div> --}}
+                </div>--}}
               </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -82,16 +82,20 @@
                 </table>
                 
                 <div class="d-flex flex-row justify-content-center gap-4">
-                  <button class="btn btn-info d-inline mb-0 prev" value="users" id="user-prev">
-                      Prev
-                  </button>
+                  <a href="?page={{prevpage}}">
+                    <button class="btn btn-info d-inline mb-0 prev" value="users" id="user-prev">
+                        Prev
+                    </button>
+                  </a>
                   <div id="user-paging">
                     <h4> {{page}} </h4>
                   </div>  
                   
-                  <button class="btn btn-info d-inline mb-0 next" value="users" id="user-next">
-                      Next
-                  </button>
+                  <a href="?page={{nextpage}}">
+                    <button class="btn btn-info d-inline mb-0 next" value="users" id="user-next">
+                        Next
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>

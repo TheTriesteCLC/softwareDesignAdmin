@@ -13,9 +13,9 @@
                         Sort
                       </button>
                       <ul class="dropdown-menu sortDropdown">
-                        <li><a class="dropdown-item users-filter" type="sorter" name="fullname" value = "1" href="">Name</a></li>
-                        <li><a class="dropdown-item users-filter" type="sorter" name="email" value = "1" href="">Email</a></li>
-                        <li><a class="dropdown-item users-filter" type="sorter" name="createdAt" value = "1" href="">Registration time</a></li>
+                        <li><a class="dropdown-item users-filter" type="sorter" name="fullname" href="?sort=username&page=1">Name</a></li>
+                        <li><a class="dropdown-item users-filter" type="sorter" name="email" href="?sort=email&page=1">Email</a></li>
+                        <li><a class="dropdown-item users-filter" type="sorter" name="createdAt" href="?sort=createdAt&page=1">Registration time</a></li>
                       </ul>
                   </div>
                 </div>
@@ -70,16 +70,20 @@
                 </table>
                 
                 <div class="d-flex flex-row justify-content-center gap-4">
-                  <button class="btn btn-info d-inline mb-0 prev" value="users" id="user-prev">
-                      Prev
-                  </button>
+                  <a href="?sort={{sorter}}&page={{prevpage}}">
+                    <button class="btn btn-info d-inline mb-0 prev" >
+                        Prev
+                    </button>
+                  </a>
                   <div id="user-paging">
                     <h4> {{page}} </h4>
                   </div>  
                   
-                  <button class="btn btn-info d-inline mb-0 next" value="users" id="user-next">
-                      Next
-                  </button>
+                  <a href="?sort={{sorter}}&page={{prevpage}}">
+                    <button class="btn btn-info d-inline mb-0 next">
+                        Next
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>
