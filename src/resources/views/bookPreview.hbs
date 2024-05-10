@@ -73,7 +73,7 @@
 <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
 
 <script>
-    let socket = io('//localhost:3000');
+    let socket = io('http://localhost:3000');
 
     const users = JSON.parse('{{{user}}}');
     let startPoint = {}
@@ -86,9 +86,12 @@
         '9 seats': 30000
     }
 
-    socket.on(`success${users._id}`, (postition) => {
-        console.log("postition:::", postition)
+    socket.emit("activityUser", users)
+    
+    socket.on(`success`, (driver) => {
+        alert(`Driver ${driver.fullname} is on the way to pick you up`)
 	})
+
 
     // Map initialization 
     var map = L.map('map').setView([10.762622, 106.660172], 12);
@@ -209,7 +212,7 @@
     map.on("moveend", geoCodingCurrentPoint);
 
     document.querySelector(".btnBook").addEventListener("click", function() {
-        socket.emit('requestUser', { id: users._id, start: startPoint, end: endPoint, car: document.querySelector(".TypeCar").value});
+        socket.emit('requestUser', { id: users._id, info: {fullname: document.getElementById('input-name').value, tel: document.getElementById('input-tel').value,}, start: startPoint, end: endPoint, car: document.querySelector(".TypeCar").value, price: document.getElementById('input-price').value});
 
         map.off("moveend", geoCodingEndPoint);
         //map.dragging.disable();
@@ -221,6 +224,7 @@
 
         L.marker(L.latLng(endPoint.latitude, endPoint.longitude), {icon: destinationLocIcon}).addTo(map)
             .bindPopup("Destination").openPopup();
+        document.querySelector(".create-an-account").innerHTML = "Waiting driver"
     })
 
 </script>
